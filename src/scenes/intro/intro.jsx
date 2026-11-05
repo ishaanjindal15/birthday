@@ -157,7 +157,7 @@ function Intro({ onContinue }) {
 
     {showStart && (
       <p className="start-text">
-        Press any key to begin
+        Press Space to begin
       </p>
     )}
 
@@ -182,7 +182,7 @@ function Intro({ onContinue }) {
               </p>
 
               <p className="continue-subtitle">
-                  Press any key
+                  Press Space
               </p>
           </div>
         )}
