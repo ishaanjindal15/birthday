@@ -1,0 +1,73 @@
+.stars {
+  position: absolute;
+  inset: 0;
+
+  overflow: hidden;
+
+  pointer-events: none;
+}
+
+
+/* individual stars */
+
+.star {
+  position: absolute;
+
+  background: #ffffff;
+
+  border-radius: 50%;
+
+  opacity: 0.4;
+
+  animation: twinkle 2.4s infinite ease-in-out;
+
+  box-shadow:
+      0 0 6px rgba(255,255,255,0.8),
+      0 0 12px rgba(255,255,255,0.4);
+}
+
+
+
+/* different star sizes */
+
+.star.small {
+  width: 2px;
+  height: 2px;
+}
+
+
+.star.medium {
+  width: 4px;
+  height: 4px;
+}
+
+
+.star.large {
+  width: 5px;
+  height: 5px;
+}
+
+
+
+/* slow breathing effect */
+
+@keyframes twinkle {
+
+  0% {
+      opacity: 0.25;
+      transform: scale(1);
+  }
+
+
+  50% {
+      opacity: 1;
+      transform: scale(1.35);
+  }
+
+
+  100% {
+      opacity: 0.25;
+      transform: scale(1);
+  }
+
+}

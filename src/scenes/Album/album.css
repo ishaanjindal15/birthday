@@ -1,0 +1,259 @@
+/* Main album scene */
+
+.album-scene {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 40px 24px;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  background: #101018;
+  color: #f5eee7;
+}
+
+/* First and second album messages */
+
+.epilogue-message {
+  width: 100%;
+  max-width: 760px;
+  margin: auto;
+  text-align: center;
+  padding: 20px;
+
+  animation: albumTextAppear 2.5s ease both;
+}
+
+.epilogue-message p {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(20px, 2.3vw, 27px);
+  font-weight: 400;
+  line-height: 1.85;
+  letter-spacing: 0.3px;
+
+  color: #f5eee7;
+  margin: 0 0 28px;
+}
+
+/* Photo album */
+
+.album-content {
+  width: 100%;
+  max-width: 850px;
+  margin: auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+  animation: albumTextAppear 1.5s ease both;
+}
+
+.album-heading {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(21px, 2.5vw, 29px);
+  font-weight: 400;
+  letter-spacing: 1px;
+
+  color: #f5eee7;
+  margin: 0 0 30px;
+}
+
+/* Polaroid frame */
+
+.polaroid {
+  width: min(100%, 500px);
+  box-sizing: border-box;
+
+  background: #f7f0e5;
+  padding: 14px 14px 10px;
+
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.35);
+  border-radius: 3px;
+
+  animation: photoAppear 1.2s ease both;
+}
+
+.photo-frame {
+  width: 100%;
+  height: min(58vh, 530px);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+  background: #e8dfd2;
+}
+
+.photo-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+  object-position: center;
+}
+
+.photo-caption {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 15px;
+  color: #554b43;
+  margin: 12px 0 3px;
+  letter-spacing: 1px;
+}
+
+/* Final prompt */
+
+.album-final-prompt {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding: 25px;
+  box-sizing: border-box;
+  text-align: center;
+
+  background: #101018;
+  color: #f5eee7;
+
+  animation: albumTextAppear 2s ease both;
+}
+
+.album-final-prompt p {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(23px, 3vw, 32px);
+  font-weight: 400;
+
+  margin: 0 0 22px;
+  color: #f5eee7;
+}
+
+.album-final-prompt span {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 15px;
+  letter-spacing: 2px;
+
+  color: #f5eee7;
+  opacity: 0.65;
+
+  animation: albumPromptPulse 2s ease-in-out infinite;
+}
+
+/* Animations */
+
+@keyframes albumTextAppear {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes photoAppear {
+  from {
+    opacity: 0;
+    transform: translateY(15px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes albumPromptPulse {
+  0%, 100% {
+    opacity: 0.3;
+  }
+
+  50% {
+    opacity: 0.85;
+  }
+}
+
+/* Mobile layout */
+
+@media (max-width: 600px) {
+  .album-scene {
+    padding: 25px 18px;
+  }
+
+  .epilogue-message {
+    padding: 10px;
+  }
+
+  .epilogue-message p {
+    font-size: 19px;
+    line-height: 1.8;
+    margin-bottom: 23px;
+  }
+
+  .album-heading {
+    font-size: 22px;
+    margin-bottom: 24px;
+  }
+
+  .polaroid {
+    width: min(100%, 340px);
+    padding: 10px 10px 8px;
+  }
+
+  .photo-frame {
+    width: 100%;
+    height: min(68vh, 620px);
+  }
+  .photo-caption {
+    font-size: 13px;
+  }
+}
+/* Consistent typography throughout the album */
+
+.album-scene,
+.album-scene p,
+.album-final-prompt,
+.album-final-prompt p,
+.album-final-prompt span {
+  font-family: "Cormorant Garamond", Georgia, serif;
+}
+
+.epilogue-message p {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(23px, 2.5vw, 30px);
+  font-weight: 500;
+  line-height: 1.7;
+}
+
+.album-heading {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 500;
+  font-size: 32px;
+}
+
+.album-final-prompt p {
+  font-size: 34px;
+  font-weight: 500;
+}
+
+.album-final-prompt span {
+  font-size: 19px;
+  letter-spacing: 1.5px;
+}

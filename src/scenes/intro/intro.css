@@ -1,0 +1,211 @@
+.intro {
+  position: fixed;
+  inset: 0;
+
+  background: rgb(0, 4, 30);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+}
+
+
+.content {
+  position: relative;
+  z-index: 10;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text-align: center;
+}
+
+
+.title {
+
+  font-family: "Cormorant Garamond", serif;
+
+  font-size: clamp(4rem, 9vw, 7rem);
+
+  font-weight: 400;
+
+  letter-spacing: .12em;
+
+  color: #be9b48;
+
+
+  text-shadow:
+  0 0 10px rgba(248, 245, 238, 0.272),
+  0 0 50px rgba(248, 245, 238, 0.437);
+
+
+  animation: reveal 3s ease forwards;
+}
+
+
+.subtitle {
+
+  margin-top: 1.5rem;
+
+  font-family: "Cormorant Garamond", serif;
+
+  font-size: 1.25rem;
+
+  letter-spacing: .18em;
+
+  color: rgba(194, 165, 100, 0.739);
+
+
+  animation: reveal 3s ease forwards;
+
+}
+
+
+.stars-container {
+  position: absolute;
+  inset: 0;
+
+  opacity: 0;
+
+  animation: skyReveal 4s ease-in;
+}
+
+.start-text {
+
+  position: absolute;
+
+  top: 60%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  color: rgba(255,255,255,0.6);
+
+  font-family: "Cormorant Garamond", serif;
+
+  font-size: 1.2rem;
+
+  letter-spacing: 0.1em;
+
+  animation: pulse 2.8s infinite ease-in-out;
+
+  z-index: 20;
+}
+
+
+.continue {
+
+  margin-top: 5rem;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  animation: breathe 3s ease-in-out infinite;
+
+}
+
+.continue-title {
+
+  font-family: "Cormorant Garamond", serif;
+
+  font-size: 1.4rem;
+
+  letter-spacing: .2em;
+
+  color: rgba(255,255,255,.85);
+
+  margin-bottom: .8rem;
+
+}
+
+.continue-subtitle {
+
+  font-family: "Cormorant Garamond", serif;
+
+  font-size: .9rem;
+
+  letter-spacing: .35em;
+
+  color: rgba(255,255,255,.45);
+
+}
+
+@keyframes breathe {
+
+  0%,100% {
+
+      opacity:.35;
+
+  }
+
+  50% {
+
+      opacity:1;
+
+  }
+
+}
+
+@keyframes pulse {
+
+  0%,100% {
+      opacity:0.3;
+  }
+
+  50% {
+      opacity:1;
+  }
+
+}
+
+
+
+
+@keyframes skyReveal {
+
+  from {
+      opacity: 0;
+  }
+
+  to {
+      opacity: 1;
+  }
+
+}
+
+
+
+
+
+
+@keyframes reveal {
+
+  from {
+
+      opacity: 0;
+
+      transform: translateY(20px);
+
+      filter: blur(14px);
+
+  }
+
+
+  to {
+
+      opacity: 1;
+
+      transform: translateY(0);
+
+      filter: blur(0);
+
+  }
+
+}
+
+/* Thought i'd add a little sparkle to the obsidian skies for a star that shines so very brightly can make the sun light up! */

@@ -1,0 +1,129 @@
+.message-scene {
+  min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 25px;
+  background: #101018;
+  color: #f5eee7;
+  overflow-y: auto;
+}
+
+.message-content {
+  width: 100%;
+  max-width: 780px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(15px);
+  transition:
+    opacity 3s ease,
+    transform 3s ease;
+}
+
+.message-content p {
+  font-family: Georgia, serif;
+  font-size: clamp(19px, 2.2vw, 25px);
+  line-height: 1.85;
+  letter-spacing: 0.3px;
+  font-weight: 400;
+  margin: 0 0 28px;
+}
+
+.message-content.message-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.message-content.message-fading-out {
+  opacity: 0;
+  transform: translateY(-12px);
+}
+
+@media (max-width: 600px) {
+  .message-scene {
+    padding: 40px 22px;
+  }
+
+  .message-content p {
+    font-size: 19px;
+    line-height: 1.75;
+    margin-bottom: 22px;
+  }
+}
+.message-scene,
+.message-content,
+.message-content p {
+  font-family: "Cormorant Garamond", Georgia, serif;
+}
+
+.message-content p {
+  font-size: clamp(23px, 2.5vw, 30px);
+  font-weight: 500;
+  line-height: 1.75;
+  letter-spacing: 0.2px;
+}
+.cinematic-ending {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  background: #101018;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+  animation: endingAppear 3s ease forwards;
+}
+
+.cinematic-ending h1 {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(48px, 8vw, 82px);
+  font-weight: 500;
+  letter-spacing: 12px;
+  color: #f5eee7;
+  margin: 20px 0;
+}
+
+.cinematic-ending p {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(19px, 2.5vw, 26px);
+  font-style: italic;
+  color: #d9c4a4;
+  animation: endingTextAppear 3s ease 1s both;
+}
+
+.ending-sunflower {
+  font-size: clamp(65px, 10vw, 110px);
+  animation: sunflowerAppear 3s ease 0.5s both;
+}
+
+@keyframes endingAppear {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes endingTextAppear {
+  from { opacity: 0; }
+  to { opacity: 0.85; }
+}
+
+@keyframes sunflowerAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.7) rotate(-15deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+}
+.cinematic-ending h1 {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(2.5rem, 7vw, 5rem);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+}
