@@ -100,7 +100,7 @@ export default function Message() {
         </p>
 
         <p>
-          But even after all this time, God gave me another
+          But even after all this time, i got another
           chance to be your friend and get to know you better.
         </p>
 
