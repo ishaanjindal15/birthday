@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import "./message.css";
 
-const DISPLAY_DURATION = 37 * 1000;
+const DISPLAY_DURATION = 38 * 1000;
 const POEM_DELAY = 18 * 1000;
 const FADE_DURATION = 3000;
 const SONG_DURATION = 63 * 1000;

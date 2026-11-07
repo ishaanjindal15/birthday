@@ -136,7 +136,7 @@ export default function Album({ audio, onComplete }) {
 
           <p>
             But before we talk about how far you've come,
-            let's take a little walk down memory lane with comfortable flats so you don'tt collapse your veins!!
+            let's take a little walk down memory lane with comfortable flats so you don'tt collapse your veins
              <br />
             shall wee??
           </p>
