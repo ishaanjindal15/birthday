@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState } from "react";
 import "./album.css";
 
@@ -8,6 +9,7 @@ import photo4 from "../../assets/4.png";
 import photo5 from "../../assets/5.png";
 import photo6 from "../../assets/6.png";
 import photo7 from "../../assets/7.png";
+import photo8 from "../../assets/8.png";
 
 const photos = [
   photo1,
@@ -17,6 +19,7 @@ const photos = [
   photo5,
   photo6,
   photo7,
+  photo8,
 ];
 
 const FIRST_MESSAGE_DURATION = 63 * 1000;
@@ -49,7 +52,7 @@ export default function Album({ audio, onComplete }) {
     };
   }, []);
 
-  // Automatically move through the seven photos.
+  // Automatically move through all eight photos.
   useEffect(() => {
     if (!showAlbum) return;
 
@@ -57,7 +60,6 @@ export default function Album({ audio, onComplete }) {
       if (currentPhoto < photos.length - 1) {
         setCurrentPhoto((previous) => previous + 1);
       } else {
-        // Remove the entire album after the last photo.
         setShowAlbum(false);
       }
     }, PHOTO_DURATION);
@@ -65,49 +67,41 @@ export default function Album({ audio, onComplete }) {
     return () => clearTimeout(photoTimer);
   }, [showAlbum, currentPhoto]);
 
-  // Once the album disappears, fade out Epilogue music.
-  // Show the final prompt only after the music has stopped.
+  // Fade out Epilogue only after the eighth photo disappears.
   useEffect(() => {
     if (showAlbum || message !== 0) return;
 
     let fadeInterval;
 
-    const finishMusic = () => {
-      if (!audio || audio.paused) {
+    if (!audio || audio.paused) {
+      setShowContinue(true);
+      return;
+    }
+
+    const startingVolume = audio.volume;
+    const steps = 50;
+    let step = 0;
+
+    fadeInterval = setInterval(() => {
+      step++;
+
+      audio.volume = Math.max(
+        0,
+        startingVolume * (1 - step / steps)
+      );
+
+      if (step >= steps) {
+        clearInterval(fadeInterval);
+        audio.pause();
+        audio.currentTime = 0;
         setShowContinue(true);
-        return;
       }
+    }, FADE_DURATION / steps);
 
-      const startingVolume = audio.volume;
-      const steps = 50;
-      const intervalDuration = FADE_DURATION / steps;
-      let step = 0;
-
-      fadeInterval = setInterval(() => {
-        step++;
-
-        audio.volume = Math.max(
-          0,
-          startingVolume * (1 - step / steps)
-        );
-
-        if (step >= steps) {
-          clearInterval(fadeInterval);
-          audio.pause();
-          audio.currentTime = 0;
-          setShowContinue(true);
-        }
-      }, intervalDuration);
-    };
-
-    finishMusic();
-
-    return () => {
-      if (fadeInterval) clearInterval(fadeInterval);
-    };
+    return () => clearInterval(fadeInterval);
   }, [showAlbum, message, audio]);
 
-  // Listen for a key only after the final prompt appears.
+  // Continue to the personal message after pressing a key.
   useEffect(() => {
     if (!showContinue) return;
 
@@ -127,7 +121,6 @@ export default function Album({ audio, onComplete }) {
 
   return (
     <main className="album-scene">
-
       {message === 1 && (
         <section className="epilogue-message" key="first">
           <p>
@@ -138,8 +131,7 @@ export default function Album({ audio, onComplete }) {
           </p>
 
           <p>
-            And when I say you've come so far, I mean it in
-            every way.
+            And when I say you've come so far, I mean it in every way.
           </p>
 
           <p>
@@ -188,7 +180,6 @@ export default function Album({ audio, onComplete }) {
           <span>press space to continue ♡</span>
         </section>
       )}
-
     </main>
   );
 }

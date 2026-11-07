@@ -5,6 +5,9 @@ import "./NightScene.css";
 import cafeTerrace from "../../assets/cafe-van-gogh.jpg";
 import Stars from "../../components/stars/stars";
 
+const VIENNA_DURATION = 68000;
+const FADE_DURATION = 5000;
+
 function NightScene({ onContinue }) {
   const audioRef = useRef(null);
   const continuedRef = useRef(false);
@@ -22,61 +25,67 @@ function NightScene({ onContinue }) {
   useEffect(() => {
     let viennaTextTimer;
     let stopViennaTimer;
-
-    // SECTION 1: FIRST MESSAGE
+    let fadeInterval;
 
     const momentTimer = setTimeout(() => {
       setShowMoment(true);
     }, 1500);
-
-    // SECTION 2: JOURNEY
 
     const journeyTimer = setTimeout(() => {
       setShowMoment(false);
       setShowJourney(true);
     }, 11500);
 
-    // SECTION 3: VAN GOGH
-
     const vanGoghTimer = setTimeout(() => {
       setShowJourney(false);
       setShowVanGogh(true);
     }, 23500);
 
-    // SECTION 4: VIENNA
-
     const musicTimer = setTimeout(() => {
       setShowVanGogh(false);
 
-      const audio = new Audio("/audio assets/Vienna.mp3");
+      const audio = new Audio(
+        "/audio%20assets/Vienna.mp3"
+      );
 
       audio.volume = 0.35;
       audio.loop = false;
-
       audioRef.current = audio;
 
-      audio.play().catch(() => {
-        console.log("Audio waiting for user interaction.");
+      audio.play().catch((error) => {
+        console.error("Vienna playback failed:", error);
       });
 
       viennaTextTimer = setTimeout(() => {
         setShowViennaText(true);
       }, 1200);
 
-      // Stop Vienna after 1 minute 8 seconds
-
+      // After 68 seconds, fade Vienna out over 5 seconds.
       stopViennaTimer = setTimeout(() => {
-        audio.pause();
-        audio.currentTime = 0;
+        const startingVolume = audio.volume;
+        const startTime = Date.now();
 
-        setShowViennaText(false);
-        setShowContinue(true);
+        fadeInterval = setInterval(() => {
+          const progress = Math.min(
+            (Date.now() - startTime) / FADE_DURATION,
+            1
+          );
 
-      }, 68000);
+          audio.volume = startingVolume * (1 - progress);
 
+          if (progress >= 1) {
+            clearInterval(fadeInterval);
+
+            audio.pause();
+            audio.currentTime = 0;
+
+            setShowViennaText(false);
+            setShowContinue(true);
+          }
+        }, 50);
+
+      }, VIENNA_DURATION);
     }, 37500);
-
-    // CLEANUP
 
     return () => {
       clearTimeout(momentTimer);
@@ -86,49 +95,54 @@ function NightScene({ onContinue }) {
       clearTimeout(viennaTextTimer);
       clearTimeout(stopViennaTimer);
 
+      clearInterval(fadeInterval);
+
       if (audioRef.current) {
         audioRef.current.pause();
         audioRef.current.currentTime = 0;
         audioRef.current = null;
       }
     };
-
   }, []);
 
+  // --------------------------------
+  // CONTINUE TO ALBUM
+  // --------------------------------
+
+  function handleContinue() {
+    if (continuedRef.current) return;
+
+    continuedRef.current = true;
+
+    const epilogueAudio = new Audio(
+      "/audio%20assets/Epilogue.mp3"
+    );
+
+    epilogueAudio.volume = 0.45;
+    epilogueAudio.loop = false;
+
+    epilogueAudio.play().catch((error) => {
+      console.error("Epilogue playback failed:", error);
+    });
+
+    onContinue(epilogueAudio);
+  }
 
   // --------------------------------
-  // PRESS ANY KEY OR CLICK TO CONTINUE
+  // KEYBOARD CONTINUE
   // --------------------------------
 
   useEffect(() => {
     if (!showContinue) return;
 
-    function handleContinue(event) {
-      if (continuedRef.current) return;
-    
+    function handleKeyDown(event) {
       if (
-        event &&
         ["Shift", "Control", "Alt", "Meta"].includes(event.key)
       ) {
         return;
       }
-    
-      continuedRef.current = true;
-    
-      // Start Epilogue music during the user's keypress.
-      const epilogueAudio = new Audio("/audio assets/Epilogue.mp3");
-      epilogueAudio.volume = 0.45;
-      epilogueAudio.loop = false;
-    
-      epilogueAudio.play().catch((error) => {
-        console.error("Epilogue playback failed:", error);
-      });
-    
-      onContinue(epilogueAudio);
-    }
 
-    function handleKeyDown(event) {
-      handleContinue(event);
+      handleContinue();
     }
 
     window.addEventListener("keydown", handleKeyDown);
@@ -136,30 +150,7 @@ function NightScene({ onContinue }) {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-
-  }, [showContinue, onContinue]);
-
-
-  // --------------------------------
-  // CLICK PROMPT
-  // --------------------------------
-
-  function handlePromptClick() {
-    if (continuedRef.current) return;
-  
-    continuedRef.current = true;
-  
-    const epilogueAudio = new Audio("/audio%20assets/Epilogue.mp3");
-    epilogueAudio.volume = 0.45;
-    epilogueAudio.loop = false;
-  
-    epilogueAudio.play().catch((error) => {
-      console.error("Epilogue playback failed:", error);
-    });
-  
-    onContinue(epilogueAudio);
-  }
-
+  }, [showContinue]);
 
   // --------------------------------
   // RENDER
@@ -168,12 +159,8 @@ function NightScene({ onContinue }) {
   return (
     <section className="night-scene">
 
-      {/* SVG PAINT EFFECT */}
-
       <svg className="paint-effects">
-
         <defs>
-
           <filter
             id="oil-breath"
             x="-5%"
@@ -181,7 +168,6 @@ function NightScene({ onContinue }) {
             width="110%"
             height="110%"
           >
-
             <feTurbulence
               type="fractalNoise"
               baseFrequency="0.0035 0.010"
@@ -189,7 +175,6 @@ function NightScene({ onContinue }) {
               seed="8"
               result="paintNoise"
             >
-
               <animate
                 attributeName="baseFrequency"
                 dur="22s"
@@ -202,7 +187,6 @@ function NightScene({ onContinue }) {
                 "
                 repeatCount="indefinite"
               />
-
             </feTurbulence>
 
             <feDisplacementMap
@@ -212,22 +196,16 @@ function NightScene({ onContinue }) {
               xChannelSelector="R"
               yChannelSelector="B"
             >
-
               <animate
                 attributeName="scale"
                 dur="18s"
                 values="6;11;8;12;6"
                 repeatCount="indefinite"
               />
-
             </feDisplacementMap>
-
           </filter>
-
         </defs>
-
       </svg>
-
 
       {/* STARS */}
 
@@ -235,25 +213,19 @@ function NightScene({ onContinue }) {
         <Stars />
       </div>
 
-
       {/* VAN GOGH PAINTING */}
 
       <div className="painting-wrap">
-
         <img
           className="cafe-terrace"
           src={cafeTerrace}
           alt="Café Terrace at Night"
         />
-
       </div>
-
 
       {/* TEXT */}
 
       <div className="night-text">
-
-        {/* FIRST MESSAGE */}
 
         {showMoment && (
           <p className="moment-text">
@@ -261,17 +233,11 @@ function NightScene({ onContinue }) {
           </p>
         )}
 
-
-        {/* SECOND MESSAGE */}
-
         {showJourney && (
           <p className="journey-text">
             And take it all in — look how far you've come.
           </p>
         )}
-
-
-        {/* VAN GOGH MESSAGE */}
 
         {showVanGogh && (
           <p className="vangogh-text">
@@ -283,32 +249,23 @@ function NightScene({ onContinue }) {
           </p>
         )}
 
-
-        {/* VIENNA MESSAGE */}
-
         {showViennaText && (
           <p className="vienna-text">
-            Oh yeah... remembered a little something of urss 🙃.
+            Oh yeah... remembered something of urss 🙃.
           </p>
         )}
-
-
-        {/* CONTINUE */}
 
         {showContinue && (
           <div
             className="vienna-continue"
-            onClick={handlePromptClick}
+            onClick={handleContinue}
             style={{ cursor: "pointer" }}
           >
-            <p>
-              Press space to begin.
-            </p>
+            <p>Press space to begin.</p>
           </div>
         )}
 
       </div>
-
     </section>
   );
 }
