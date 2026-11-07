@@ -156,7 +156,7 @@ export default function Album({ audio, onComplete }) {
       {showAlbum && (
         <section className="album-content">
           <p className="album-heading">
-            A little collection of memories
+            A collection of sweeetest memories
           </p>
 
           <div className="polaroid" key={currentPhoto}>

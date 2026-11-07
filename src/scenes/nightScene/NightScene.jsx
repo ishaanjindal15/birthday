@@ -6,7 +6,7 @@ import cafeTerrace from "../../assets/cafe-van-gogh.jpg";
 import Stars from "../../components/stars/stars";
 
 const VIENNA_DURATION = 68000;
-const FADE_DURATION = 5000;
+const FADE_DURATION = 2500;
 
 function NightScene({ onContinue }) {
   const audioRef = useRef(null);
