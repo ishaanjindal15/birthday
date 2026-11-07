@@ -171,7 +171,7 @@ function Intro({ onContinue }) {
 
       {showSubtitle && (
         <p className="subtitle">
-          Since you love sparkles,i thought i'd a little to the obsidian skies for a star that shines so very brightly can make the sun blush pink!
+          As you love sparkles,i thought i'd a little to the obsidian skies for a star that shines so very brightly can make the sun blush pink!
         </p>
       )}
 

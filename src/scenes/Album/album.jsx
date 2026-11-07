@@ -136,7 +136,8 @@ export default function Album({ audio, onComplete }) {
 
           <p>
             But before we talk about how far you've come,
-            let's take a little walk down memory lane with comfortable flats so you dont collapse your veins <br />
+            let's take a little walk down memory lane with comfortable flats so you don'tt collapse your veins!!
+             <br />
             shall wee??
           </p>
 
@@ -177,7 +178,7 @@ export default function Album({ audio, onComplete }) {
 
       {showContinue && (
         <section className="album-final-prompt">
-          <p>And now, one last thing...</p>
+          <p>And now, one moree thing...</p>
           <span>press space to continue ♡</span>
         </section>
       )}

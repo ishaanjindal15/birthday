@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import "./message.css";
 
-const DISPLAY_DURATION = 30 * 1000;
+const DISPLAY_DURATION = 37 * 1000;
 const POEM_DELAY = 18 * 1000;
 const FADE_DURATION = 3000;
 const SONG_DURATION = 63 * 1000;
@@ -181,9 +181,9 @@ export default function Message() {
           <p>Lastly,</p>
 
           <p>
-            All this I did without you. This was my loss.
-            All this I want to do with you. This will be my gain.
-            All this I would gladly have forgone for the sake of one minute of your company,
+            All this I did without you. This was my loss. <br />
+            All this I want to do with you. This will be my gain. <br />
+            All this I would gladly have forgone for the sake of one minute of your company, <br />
             for your laugh, your voice, your eyes, hair, and above all for your sweet,
             ever-surprising mind which is an enchanting quarry in which it is my privilege to delve.
           </p>
