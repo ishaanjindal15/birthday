@@ -148,8 +148,9 @@ export default function Message() {
 
           <p>
             One more thing I've always wanted to sayy. Since we
-            spent a lot of years apart, there were a lot of things
-            I left undone and unsaid. Things I could've done differently.
+            spent a lot of years apart, I'm really happy that
+            i got the chance to be your friend and we got to know each other better
+            again.
           </p>
 
           <p>
@@ -158,8 +159,9 @@ export default function Message() {
           </p>
 
           <p>
-            So yeah, this is me trying to make up for a little
-            of that lost time, in whatever little ways I can.
+          So this is just my little way of making you joyfull,
+          and reminding you that you're someone I genuinely
+          appreciate having in my life.
           </p>
 
           <p>
@@ -183,7 +185,7 @@ export default function Message() {
           <p>
             All this I did without you. This was my loss. <br />
             All this I want to do with you. This will be my gain. <br />
-            All this I would gladly have forgone for the sake of one minute of your company, <br />
+            for all the joy of sharing even the simplest passing moments with you, <br />
             for your laugh, your voice, your eyes, hair, and above all for your sweet,
             ever-surprising mind which is an enchanting quarry in which it is my privilege to delve.
           </p>
