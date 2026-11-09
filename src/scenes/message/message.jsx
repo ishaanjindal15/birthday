@@ -154,8 +154,7 @@ export default function Message() {
           </p>
 
           <p>
-            But even after all this time, i got another
-            chance to be your friend and get to know you better.
+            God has been really kindd to me for thatt!!.
           </p>
 
           <p>
