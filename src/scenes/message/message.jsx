@@ -185,7 +185,7 @@ export default function Message() {
             All this I did without you. This was my loss. <br />
             All this I want to do with you. This will be my gain. <br />
             for all the joy of sharing even the simplest passing moments with you, <br />
-            for your laugh, your voice, your eyes, hair, and above all for your sweet,
+            for your laugh, your voice, your eyes, and above all for your sweet,
             ever-surprising mind which is an enchanting quarry in which it is my privilege to delve.
           </p>
         </div>
